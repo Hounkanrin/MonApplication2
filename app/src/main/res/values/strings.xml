@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">My Application2</string>
+
+    <string-array name="departements_array">
+        <item>Ain</item>
+        <item>Aisne</item>
+        <item>Allier</item>
+        <item>Aube</item>
+        <item>Calvados</item>
+        <item>Cantal</item>
+        <item>Finistère</item>
+        <item>Ille-et-vilaine</item>
+    </string-array>
+</resources>
