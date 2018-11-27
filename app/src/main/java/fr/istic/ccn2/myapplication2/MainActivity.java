@@ -35,15 +35,31 @@ public class MainActivity extends AppCompatActivity  implements
         ButterKnife.bind(this);
         spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.departements_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.departements_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
 
-
         addValider = (Button) findViewById(R.id.valider);
-        addValider.setOnClickListener(new View.OnClickListener() {
-            @Override
+        addValider.setOnClickListener(new AddButtonClickHandle());
+    }
+    public class AddButtonClickHandle implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            CharSequence text = "Votre nom est " + name.getText().toString()
+                    + " "
+                    + lastname.getText().toString() + " naissance " + date.getText().toString()
+                    + " ville " + ville.getText().toString() + " departement " + spinner.getSelectedItem().toString() ;
+            Intent activity2Intent = new Intent(MainActivity.this, MainActivity2.class);
+            activity2Intent.putExtra("vos informations", text);
+            startActivity(activity2Intent);
+
+
+        }
+    }
+
+
+           /* @Override
             public void onClick(View view) {
                 Context context = getApplicationContext();
                 CharSequence text = "Votre nom est " + name.getText().toString()
@@ -55,9 +71,9 @@ public class MainActivity extends AppCompatActivity  implements
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
 
-            }
-        });
-    }
+            }*/
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
