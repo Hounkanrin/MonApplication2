@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity  implements
 
         }
     }
-
-
            /* @Override
             public void onClick(View view) {
                 Context context = getApplicationContext();

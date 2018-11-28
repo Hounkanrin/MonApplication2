@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_main3"
+    android:orientation="vertical" >
+
+
+    <TextView
+        android:id="@+id/activity3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TEXT"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="278dp"
+        tools:itemCount="9"
+        tools:layoutManager="GridLayoutManager"
+        tools:listitem="@layout/recycler_view_item"
+        tools:spanCount="5" />
+
+    <Button
+        android:id="@+id/ajouter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="nouveau client" />
+
+</LinearLayout>
