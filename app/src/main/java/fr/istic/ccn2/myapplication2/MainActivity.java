@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
@@ -24,9 +25,6 @@ public class MainActivity extends AppCompatActivity  implements
     @Bind(R.id.layout) LinearLayout parentLinearLayout;
     private Spinner spinner = null;
     private View view;
-/* Intent intent = new Intent().setClass(this, )Intent.ACTION_VIEW,
-            Uri.parse("http://fr.wikipedia.org"));*/
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +44,28 @@ public class MainActivity extends AppCompatActivity  implements
     public class AddButtonClickHandle implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            CharSequence text = "Votre nom est " + name.getText().toString()
-                    + " "
+            String lname = name.getText().toString();
+            String llastname = lastname.getText().toString();
+            String ldate = date.getText().toString();
+            String lville = ville.getText().toString();
+            String departement = spinner.getSelectedItem().toString();
+
+            User user = new User(lname, llastname, ldate, lville, departement);
+            Log.e("U", lname);
+           /* CharSequence text = "nom " + name.getText().toString()
+                    + "prenom"
                     + lastname.getText().toString() + " naissance " + date.getText().toString()
-                    + " ville " + ville.getText().toString() + " departement " + spinner.getSelectedItem().toString() ;
-            Intent activity2Intent = new Intent(MainActivity.this, MainActivity2.class);
-            activity2Intent.putExtra("vos informations", text);
-            startActivity(activity2Intent);
-
-
+                    + " ville " + ville.getText().toString() + " departement "  + spinner.getSelectedItem().toString();*/
+            Intent activity3Intent = new Intent(MainActivity.this, Main3Activity.class);
+            activity3Intent.putExtra("user", user);
+            Log.e("UD", lname);
+            startActivity(activity3Intent);
+            finish();
         }
     }
+
+
+
            /* @Override
             public void onClick(View view) {
                 Context context = getApplicationContext();
@@ -70,6 +79,7 @@ public class MainActivity extends AppCompatActivity  implements
                 toast.show();
 
             }*/
+
 
 
 
