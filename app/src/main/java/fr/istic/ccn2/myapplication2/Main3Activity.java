@@ -1,5 +1,6 @@
 package fr.istic.ccn2.myapplication2;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,34 +23,40 @@ public class Main3Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerViewAdapter recyclerViewAdapter;
-    @Bind(R.id.ajouter) Button ajouter;
+    Button ajouter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        ButterKnife.bind(this);
+        //ButterKnife.bind(this);
 
         ajouter = (Button) findViewById(R.id.ajouter);
         ajouter.setOnClickListener(new AddButtonClick());
 
-        Intent intent = getIntent();
-        User user = intent.getParcelableExtra("user");
+        //Intent intent = getIntent();
+      //  User user = intent.getParcelableExtra("user");
 
         //Log.d("M"," Mais"+user.getmLastname());
 
-        List<ClientItem> listClient = new ArrayList<>();
+       /* List<ClientItem> listClient = new ArrayList<>();
         listClient.add(new ClientItem("vivi","houn", "12/12/12","rennes", "ille-et-vilaine"));
         listClient.add(new ClientItem("viviane","houn", "12/12/12","rennes", "ille-et-vilaine"));
        if(user !=null){
             listClient.add(new ClientItem(user.getmName(), user.getmLastname(), user.getmDate(), user.getmVille(), user.getmDepartement()));
-        }
+        }*/
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         layoutManager = new LinearLayoutManager(this);
 
+        ClientDatabase db = Room.databaseBuilder(getApplicationContext(), ClientDatabase.class, "data")
+                .allowMainThreadQueries()
+                .build();
+
+        List<ClientItem> listClient = db.clientDao().getAllClient();
+
         recyclerView.setLayoutManager(layoutManager);
-        recyclerViewAdapter = new RecyclerViewAdapter((ArrayList<ClientItem>) listClient);
+        recyclerViewAdapter = new RecyclerViewAdapter(listClient);
         recyclerView.setAdapter(recyclerViewAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),DividerItemDecoration.VERTICAL);

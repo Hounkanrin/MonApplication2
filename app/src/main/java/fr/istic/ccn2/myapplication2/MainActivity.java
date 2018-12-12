@@ -1,6 +1,8 @@
 package fr.istic.ccn2.myapplication2;
 
 
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,6 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
+
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -50,17 +55,23 @@ public class MainActivity extends AppCompatActivity  implements
             String lville = ville.getText().toString();
             String departement = spinner.getSelectedItem().toString();
 
-            User user = new User(lname, llastname, ldate, lville, departement);
+           ClientItem client = new ClientItem(lname, llastname, ldate, lville, departement);
             Log.e("U", lname);
            /* CharSequence text = "nom " + name.getText().toString()
                     + "prenom"
                     + lastname.getText().toString() + " naissance " + date.getText().toString()
                     + " ville " + ville.getText().toString() + " departement "  + spinner.getSelectedItem().toString();*/
-            Intent activity3Intent = new Intent(MainActivity.this, Main3Activity.class);
-            activity3Intent.putExtra("user", user);
+           ClientDatabase db = Room.databaseBuilder(getApplicationContext(), ClientDatabase.class, "data")
+                   .allowMainThreadQueries()
+                   .build();
+
+           //db.clientDao().insertAll(new ClientItem("vivi", "h", "12-12-14", "rennes", "ille-et-vilaine"));
+            db.clientDao().insertAll(client);
+           Intent activity3Intent = new Intent(MainActivity.this, Main3Activity.class);
+           //activity3Intent.putExtra("user", clientItem);
             Log.e("UD", lname);
             startActivity(activity3Intent);
-            finish();
+            //finish();
         }
     }
 

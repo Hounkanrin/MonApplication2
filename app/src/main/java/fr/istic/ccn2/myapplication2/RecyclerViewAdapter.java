@@ -12,12 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>{
     private static final String TAG = "RecyclerViewAdapter";
-    private ArrayList<ClientItem> list;
+    private List<ClientItem> list;
 
-    public RecyclerViewAdapter( ArrayList<ClientItem> list) {
+    public RecyclerViewAdapter( List<ClientItem> list) {
         this.list = list;
 
     }
